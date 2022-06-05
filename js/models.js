@@ -76,7 +76,7 @@ class StoryList {
    */
 
   async addStory(author, title, url /* user, newStory */) {
-    // SB- UNIMPLEMENTED: complete this function!
+    // PS- complete  SB- UNIMPLEMENTED: complete this function!
 
     const response = await axios({
       url: `${BASE_URL}/stories`,
@@ -88,6 +88,20 @@ class StoryList {
           "title": title,
           "url": url
         }
+      }
+    });
+    console.log("response from addStory: ", response)
+  }
+
+  async removeStory(storyId) {
+    // PS- complete  SB- UNIMPLEMENTED: complete this function!
+
+    const response = await axios({
+      url: `${BASE_URL}/stories/${storyId}`,
+      method: "DELETE",
+      data: {
+        "token": currentUser.loginToken,
+        "storyId": storyId
       }
     });
     console.log("response from addStory: ", response)
@@ -209,4 +223,31 @@ class User {
       return null;
     }
   }
+
+
+  async addFavorite(username, storyId) {
+    const response = await axios({
+      url: `${BASE_URL}/user/${username}/favorites/${storyId}`,
+      method: "POST",
+      data: {
+        "token": currentUser.loginToken,
+        "username": username,
+        "storyId": storyId
+      }
+    });
+  }
+
+  async deleteFavorite(username, storyId) {
+    const response = await axios({
+      url: `${BASE_URL}/user/${username}/favorites/${storyId}`,
+      method: "DELETE",
+      data: {
+        "token": currentUser.loginToken,
+        "username": username,
+        "storyId": storyId
+      }
+    });
+  }
 }
+
+

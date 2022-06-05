@@ -225,28 +225,28 @@ class User {
   }
 
 
-  async addFavorite(username, storyId) {
-    const response = await axios({
-      url: `${BASE_URL}/user/${username}/favorites/${storyId}`,
-      method: "POST",
-      data: {
-        "token": currentUser.loginToken,
-        "username": username,
-        "storyId": storyId
-      }
-    });
+  async addFavorite(storyId) {
+  const response = await axios({
+    url: `${BASE_URL}/users/${currentUser.username}/favorites/${storyId}`,
+    method: "POST",
+    params: {
+    "token": currentUser.loginToken,
+    }
+      // "username": currentUser.username,
+      // "storyId": storyId
+  });
+  console.log("response from addFavorite: ", response)
   }
 
-  async deleteFavorite(username, storyId) {
+  async deleteFavorite(storyId) {
     const response = await axios({
-      url: `${BASE_URL}/user/${username}/favorites/${storyId}`,
+      url: `${BASE_URL}/users/${currentUser.username}/favorites/${storyId}`,
       method: "DELETE",
       data: {
-        "token": currentUser.loginToken,
-        "username": username,
-        "storyId": storyId
+        "token": currentUser.loginToken
       }
     });
+    console.log("response from deleteFavorite: ", response)
   }
 }
 

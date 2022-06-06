@@ -34,3 +34,28 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+// function addStory(evt) {
+//   console.debug("navAddStory", evt);
+//   hidePageComponents();
+//   $newStoryForm.show();
+// }
+
+/** Show new story form on click on "submit" */
+
+function navNewStoryClick() {
+  hidePageComponents();
+  $newStoryForm.show();
+}
+
+$navNewStory.on("click", navNewStoryClick);
+
+/** Show favorites on click on "favorites" */
+
+function navFavoritesClick() {
+  console.log("navFavorites clicked");
+  hidePageComponents();
+  $fav.show();
+}
+
+$navFavorites.on("click", navFavoritesClick);

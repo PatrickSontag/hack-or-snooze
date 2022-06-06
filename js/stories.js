@@ -12,6 +12,20 @@ async function getAndShowStoriesOnStart() {
   putStoriesOnPage();
 }
 
+async function getAndShowFavorites() {
+  storyList = await StoryList.getFavorites();
+  $storiesLoadingMsg.remove();
+
+  putStoriesOnPage();
+}
+
+async function getAndShowOwnStories() {
+  storyList = await StoryList.getOwnStories();
+  $storiesLoadingMsg.remove();
+
+  putStoriesOnPage();
+}
+
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
@@ -23,8 +37,13 @@ function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
   const hostName = story.getHostName();
+  let favCheck = "";
+  if (currentUser.favorites.indexOf(story.storyId) !== -1) {
+    favCheck = "checked";
+  }
   return $(`
       <li id="${story.storyId}">
+      <input type="checkbox" id="favorite-checkbox" ${favCheck}>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -69,3 +88,27 @@ async function newStorySubmit(evt){
 }
 
 $newStoryButton.on("click", newStorySubmit);
+
+async function addFavoriteStory(evt){
+  const favStoryId =  evt.target.parentElement.id;
+  // const targetStory = evt.target;
+  // let hasFavClass = targetStory.classList.contains("fav-yes");
+
+  // console.log("hasFavClass (before if): ", hasFavClass);
+
+  // if(hasFavClass === true) {
+  //   console.log("true, if statment ran");
+  //   targetStory.classList.remove("fav-yes");
+  //   targetStory.classList.add("fav-no");
+  // } else {
+  //   console.log("not true, else statement ran");
+  //   targetStory.classList.remove("fav-no");
+  //   targetStory.classList.add("fav-yes");
+  // }
+  // hasFavClass = targetStory.classList.contains("fav-yes");
+  // console.log("hasFavClass (after if): ", hasFavClass);
+
+  await currentUser.addFavorite(favStoryId);
+  // getAndShowFavorites()
+}
+$body.on("click", "#favorite-checkbox", addFavoriteStory);

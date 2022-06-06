@@ -14,11 +14,13 @@ const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
 
+const $navFavorites = $("#nav-favorites");
 const $navNewStory = $("#nav-new-story");
+const $navOwnStories = $("#nav-my-stories");
+
 const $newStoryForm = $("#new-story-form");
 const $newStoryButton = $("#new-story-btn");
 
-const $navFavorites = $("#nav-favorites");
 const $fav = $(".fav-yes");
 const $unFav = $(".fav-no");
 const $favCheckbox = $("#favorite-checkbox");
@@ -36,6 +38,7 @@ function hidePageComponents() {
     $allStoriesList,
     $loginForm,
     $signupForm,
+    $newStoryForm
   ];
   components.forEach(c => c.hide());
 }

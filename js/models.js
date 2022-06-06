@@ -68,6 +68,26 @@ class StoryList {
     return new StoryList(stories);
   }
 
+  static async getFavorites() {
+
+    const myFavorites = currentUser.favorites;
+
+    const favs = myFavorites.map(story => new Story(story));
+
+    // build an instance of our own class using the new array of stories
+    return new StoryList(favs);
+  }
+
+  static async getOwnStories() {
+
+    const ownStories = currentUser.ownStories;
+
+    const myStories = ownStories.map(story => new Story(story));
+
+    // build an instance of our own class using the new array of stories
+    return new StoryList(myStories);
+  }
+
   /** Adds story data to API, makes a Story instance, adds it to story list.
    * - user - the current instance of User who will post the story
    * - obj of {title, author, url}
@@ -75,8 +95,11 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory(author, title, url /* user, newStory */) {
+  async addStory(user, newStory) {
     // PS- complete  SB- UNIMPLEMENTED: complete this function!
+    const author = newStory.author;
+    const title = newStory.title;
+    const url = newStory.url;
 
     const response = await axios({
       url: `${BASE_URL}/stories`,
@@ -232,10 +255,10 @@ class User {
     params: {
     "token": currentUser.loginToken,
     }
-      // "username": currentUser.username,
-      // "storyId": storyId
   });
   console.log("response from addFavorite: ", response)
+  currentUser.favorites = response.data.user.favorites;
+  console.log(currentUser.favorites);
   }
 
   async deleteFavorite(storyId) {

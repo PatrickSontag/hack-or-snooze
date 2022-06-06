@@ -9,7 +9,8 @@
 function navAllStories(evt) {
   console.debug("navAllStories", evt);
   hidePageComponents();
-  putStoriesOnPage();
+  getAndShowStoriesOnStart()
+  // putStoriesOnPage();
 }
 
 $body.on("click", "#nav-all", navAllStories);
@@ -54,8 +55,19 @@ $navNewStory.on("click", navNewStoryClick);
 
 function navFavoritesClick() {
   console.log("navFavorites clicked");
+  // location.reload()
   hidePageComponents();
-  $fav.show();
+  getAndShowFavorites()
+  // $fav.show();
 }
 
 $navFavorites.on("click", navFavoritesClick);
+
+function navOwnStoriesClick() {
+  console.log("navOwnStories clicked");
+  hidePageComponents();
+  getAndShowOwnStories()
+  // $fav.show();
+}
+
+$navOwnStories.on("click", navOwnStoriesClick);

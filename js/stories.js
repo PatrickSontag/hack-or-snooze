@@ -38,9 +38,18 @@ function generateStoryMarkup(story) {
 
   const hostName = story.getHostName();
   let favCheck = "";
-  if (currentUser.favorites.indexOf(story.storyId) !== -1) {
-    favCheck = "checked";
+  let favs = [];
+  for(let i = 0; i < currentUser.favorites.length; i++) {
+      favs.push(currentUser.favorites[i].storyId);
+      // console.log(currentUser.favorites[i].storyId);
   }
+    if (favs.indexOf(story.storyId) !== -1) {
+      favCheck = "checked";
+    }
+  console.log("favs.indexOf(story.storyId): ", favs.indexOf(story.storyId));
+  // console.log("favs: ", favs);
+  console.log("story.storyId: ", story.storyId);
+
   return $(`
       <li id="${story.storyId}">
       <input type="checkbox" id="favorite-checkbox" ${favCheck}>

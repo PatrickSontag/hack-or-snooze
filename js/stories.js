@@ -100,24 +100,9 @@ $newStoryButton.on("click", newStorySubmit);
 
 async function addFavoriteStory(evt){
   const favStoryId =  evt.target.parentElement.id;
-  // const targetStory = evt.target;
-  // let hasFavClass = targetStory.classList.contains("fav-yes");
-
-  // console.log("hasFavClass (before if): ", hasFavClass);
-
-  // if(hasFavClass === true) {
-  //   console.log("true, if statment ran");
-  //   targetStory.classList.remove("fav-yes");
-  //   targetStory.classList.add("fav-no");
-  // } else {
-  //   console.log("not true, else statement ran");
-  //   targetStory.classList.remove("fav-no");
-  //   targetStory.classList.add("fav-yes");
-  // }
-  // hasFavClass = targetStory.classList.contains("fav-yes");
-  // console.log("hasFavClass (after if): ", hasFavClass);
 
   await currentUser.addFavorite(favStoryId);
   // getAndShowFavorites()
 }
 $body.on("click", "#favorite-checkbox", addFavoriteStory);
+
